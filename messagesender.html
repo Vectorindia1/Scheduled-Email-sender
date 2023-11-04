@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scheduled Message Sender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #3498db, #e74c3c);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        /* Highlight the text input boxes and give them black borders */
+        input[type="email"],
+        textarea,
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #000; /* Black border */
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #c0392b;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Scheduled Message Sender</h1>
+        <input type="email" id="recipientEmail" placeholder="Recipient's Email">
+        <input type="email" id="userEmail" placeholder="Your Email">
+        <textarea id="message" placeholder="Enter your message"></textarea>
+        <input type="datetime-local" id="sendDateTime">
+        <button onclick="scheduleMessage()">Schedule Message</button>
+    </div>
+
+    <script>
+        function scheduleMessage() {
+            const recipientEmail = document.getElementById("recipientEmail").value;
+            const userEmail = document.getElementById("userEmail").value;
+            const message = document.getElementById("message").value;
+            const sendDateTime = new Date(document.getElementById("sendDateTime").value).toISOString();
+
+            if (sendDateTime <= new Date().toISOString()) {
+                alert("Please select a future date and time.");
+                return;
+            }
+
+            const data = {
+                recipientEmail,
+                userEmail,
+                message,
+                sendDateTime,
+            };
+
+            // Simulate sending the scheduled message by logging details to the console
+            console.log("Scheduled Email Details:", data);
+
+            alert(`Message scheduled for ${new Date(sendDateTime)}`);
+        }
+    </script>
+</body>
+</html>
